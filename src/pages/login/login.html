@@ -1,0 +1,42 @@
+<ion-navbar *navbar>
+    <ion-title>
+        Login
+    </ion-title>
+</ion-navbar>
+ 
+<ion-content padding>
+    <ion-list>
+      <ion-item>
+        <ion-img src="assets/imgs/c8c8.png" style="height:100px; width:100px;"></ion-img>
+      </ion-item>
+      <ion-item>
+        <ion-label style="color:#777777">c8c8</ion-label>
+      </ion-item>
+
+      <ion-item>
+          <ion-input name="userid" placeholder="E-mail" [(ngModel)]="data.userid"></ion-input>
+        </ion-item>
+      <ion-item>
+        <ion-input name="userpasswd" placeholder="Password" [(ngModel)]="data.userpasswd" type="password"></ion-input>
+        </ion-item>
+      <ion-item>
+        <button ion-button round style="border-radius:50%; height:50px; width:50px;" (click)="submit()">Login</button>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label class="ion-label" style="color:#777777" (click)="forget()">Forget password?</ion-label>
+      </ion-item>
+
+      <ion-item>  
+          <ion-label [hidden]="!(data.response)" style="color:red">
+            {{data.response}}
+          </ion-label>
+      </ion-item>
+
+    </ion-list>
+    
+</ion-content>
+
+<ion-footer no-border align="center">
+    <ion-label>c8c8 © 2017 all rights reserved</ion-label>
+</ion-footer>

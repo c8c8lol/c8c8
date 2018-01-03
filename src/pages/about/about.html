@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      個人資訊
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-list>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="assets/imgs/c8c8.png" style="width:100px; height:100px;">
+        </ion-avatar>
+        <h2>{{worker_data.name}}</h2>
+        <p>{{worker_data.position}}</p>
+      </ion-item>   
+
+      <ion-item>
+        <ion-icon name="person" item-start></ion-icon>
+        <p>{{worker_data.id}}</p>
+      </ion-item>
+    
+      <ion-item>
+        <ion-icon name="phone-portrait" item-start></ion-icon>
+        <p>{{worker_data.phone}}</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="mail" item-start></ion-icon>
+        <p>{{worker_data.mail}}</p>
+      </ion-item>
+
+
+    </ion-list>
+  </ion-card>
+</ion-content>

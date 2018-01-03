@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      班表
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card no-lines *ngFor="let sche_detail of sche" (click)="go_scheDetail(sche_detail)">
+      <ion-item>
+        <ion-title item-start>{{sche_detail.date}}</ion-title>
+      </ion-item>
+      <ion-item>
+        <p class="workerImg" item-start *ngFor="let worker of sche_detail.worker;">
+          <img src="assets/imgs/2.jpg" />
+        </p>
+      </ion-item>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,30 @@
+page-scheDetail {
+    background: rgba(0,0,0,0.5);
+    
+    ion-content.content{
+        height: 60%;
+        width: 60%;
+        top: 20%;
+        left: 20%;
+        border-radius: 20px;
+        .scroll-content {
+            border-radius: 20px;
+        }
+    }
+    ion-avatar{
+        display: flex;
+        flex-direction: column;    /* align flex items vertically */
+        justify-content: center;   /* center items vertically, in this case */
+        align-items: center;       /* center single-line items horizontally, in this case */
+        align-content: center;     /* center multi-line items horizontally, in this case */
+    }
+    ion-avatar img{
+        width:160px;
+        height:160px;
+        border-radius: 80px; 
+    }
+    ion-col{
+        width:50px;
+        text-align: center;
+    }
+}

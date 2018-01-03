@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>設定</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-list-header>
+      更改個人資訊
+    </ion-list-header>
+    <ion-item>
+      <ion-input placeholder="姓名" [(ngModel)]="worker_data.name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input placeholder="密碼" [(ngModel)]="worker_data.pw" type="password"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-input placeholder="電話" [(ngModel)]="worker_data.phone">Phone</ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-input placeholder="E-mail" [(ngModel)]="worker_data.mail">E-mail</ion-input>
+    </ion-item>
+    <ion-item>
+      <button ion-button round (click)="EditData()">修改</button>
+    </ion-item>
+    
+  </ion-list>
+</ion-content>
