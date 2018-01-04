@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
-import { AboutPage } from '../about/about';
-import { ContactPage } from '../contact/contact';
+import { PersonPage } from '../person/person';
+import { SearchPage } from '../search/search';
 import { HomePage } from '../home/home';
-import { SettingPage } from '../setting/setting';
+import { SchedulePage } from '../schedule/schedule';
 import { LeavePage } from '../leave/leave';
 
 @Component({
@@ -12,10 +12,10 @@ import { LeavePage } from '../leave/leave';
 export class TabsPage {
 
   tab1Root = HomePage;
-  tab2Root = AboutPage;
-  tab3Root = ContactPage;
+  tab2Root = SearchPage;
+  tab3Root = SchedulePage;
   tab4Root = LeavePage;
-  tab5Root = SettingPage;
+  tab5Root = PersonPage;
 
   constructor() {
 
