@@ -58,6 +58,36 @@ export class UserData {
     });
   };
 
+  setmail(mail: string): void {
+    this.storage.set('mail', mail);
+  };
+
+  getmail(): Promise<string> {
+    return this.storage.get('mail').then((value) => {
+      return value;
+    });
+  };
+
+  setphone(phone: string): void {
+    this.storage.set('phone', phone);
+  };
+
+  getphone(): Promise<string> {
+    return this.storage.get('phone').then((value) => {
+      return value;
+    });
+  };
+
+  setcode(code: string): void {
+    this.storage.set('code', code);
+  };
+
+  getcode(): Promise<string> {
+    return this.storage.get('code').then((value) => {
+      return value;
+    });
+  };
+
   hasLoggedIn(): Promise<boolean> {
     return this.storage.get(this.HAS_LOGGED_IN).then((value) => {
       return value === true;

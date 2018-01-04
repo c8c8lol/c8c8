@@ -9,6 +9,8 @@ import { UserOptions } from '../../interfaces/user-options';
 
 import { TabsPage } from '../tabs/tabs';
 
+import { PersonPage } from '../person/person';
+
 import { AlertController } from 'ionic-angular';
 
 import { EmailComposer } from '@ionic-native/email-composer';
@@ -20,36 +22,51 @@ import { SMS } from '@ionic-native/sms';
   templateUrl: 'login.html'
 })
 export class LoginPage {
+  VSCode="1234";
   username:string;
   usermail:string;
   private mail:any;
   login: UserOptions = { username: '', password: '' };
   submitted = false;
 
-  constructor(public navCtrl: NavController, public userData: UserData,public alertCtrl: AlertController) { //private sms: SMS,private emailComposer: EmailComposer
+  constructor(public navCtrl: NavController, public userData: UserData,public alertCtrl: AlertController,public person:PersonPage) { //private sms: SMS,private emailComposer: EmailComposer
     this.mail=
     {
       name:'',
-      email:''
+      email:'',
+      phone:'',
+      code:''
     }
   }
 
-  /*getUsername() {
-    this.userData.getUsername().then((username) => {
-      this.username = username;
+  getUsername() {
+    this.userData.getUsername().then((name) => {
+      this.mail.name = name;
     });
   }
 
   getmail() {
-    this.userData.getUsername().then((usermail) => {
-      this.usermail = usermail;
+    this.userData.getmail().then((email) => {
+      this.mail.email = email;
     });
-  }*/
+  }
+
+  getphone() {
+    this.userData.getphone().then((phone) => {
+      this.mail.phone = phone;
+    });
+  }
+
+  getcode() {
+    this.userData.getcode().then((code) => {
+      this.mail.code = code;
+    });
+  }
 
   Email() {
     let alert = this.alertCtrl.create({
       title: 'Forget Password',
-      subTitle: "Enter your username and e-mail to change your password"+this.mail.name+this.mail.email+"**",
+      subTitle: "Enter your Username and E-mail to change your password"+this.mail.name+this.mail.email+"**",
 
       });
       alert.addInput({
@@ -75,11 +92,10 @@ export class LoginPage {
       alert.addButton({
           text: 'Submit',
           handler: (data: any) => {
-            console.log("data:",data)
-            //this.mail.name=this.username;
-            //this.getUsername();
-            //this.mail.email=this.usermail;
-            //this.getmail();
+            this.getUsername();//不知道有沒有存到值
+            this.getmail();//同上
+            this.Email_Sending();
+            this.Enter_VSCode();//輸入VSCode後顯示更改密碼介面
           }
         });  
     
@@ -89,30 +105,38 @@ export class LoginPage {
       SMS() {
         let alert = this.alertCtrl.create({
           title: 'Forget Password',
-          subTitle: "Enter your Phone number to change password"+this.mail.name+this.mail.email+"**",
-          buttons: [
-            'Cancel'
-          ]
+          subTitle: "Enter your Username and Phone Number to change your password"+this.mail.name+this.mail.phone+"**",
+    
           });
           alert.addInput({
+            type:'prompt',
             name: 'username',
-            value: this.username,
+            value: this.mail.name,
             placeholder: 'username'
           });
           alert.addInput({
+            type:'prompt',
             name: 'phone_number',
-            value: this.usermail,
+            value: this.mail.phone,
             placeholder: 'phone number'
           });
-            alert.addButton({
+    
+          alert.addButton({
+            text: 'Cancel',
+            handler: (data: any) => {
+              this.ForgetPW();
+            }
+          });
+    
+          alert.addButton({
               text: 'Submit',
               handler: (data: any) => {
-                this.mail.name=this.username;
-                //this.getUsername();
-                this.mail.email=this.usermail;
-                //this.getmail();
+                this.getUsername();//不知道有沒有存到值
+                this.getphone();//同上
+                this.SMS_Sending();
+                this.Enter_VSCode();//之後輸入VSCode後顯示更改密碼介面
               }
-            });
+            });  
         
             alert.present();
           }
@@ -146,33 +170,49 @@ export class LoginPage {
       this.navCtrl.push(TabsPage);
     }
   }
-
-  /*this.emailComposer.isAvailable().then((available: boolean) =>{
+  Email_Sending(){
+   /* this.emailComposer.isAvailable().then((available: boolean) =>{//check whether email is available
     if(available) {
       //Now we know we can send
-    }
-    else
-    {
-      let alert = this.alertCtrl.create({
-        title: 'WRONG EMAIL',
-        subTitle: "Please enter the correct email ,this email is unavailable",
-        buttons: [
-          'OK'//re-enter
-        ]
-        }); 
     }
    });
    
    let email = {
-     to: 'max@mustermann.de',
-     cc: 'erika@mustermann.de',
-     bcc: ['john@doe.com', 'jane@doe.com'],
-     subject: 'Cordova Icons',
-     body: 'Dear @username, please enter the VSCode to change your password.\n The VCode is XXXX',
+     to: this.mail.email,
+     //cc: 'erika@mustermann.de',
+     //bcc: ['john@doe.com', 'jane@doe.com'],
+     subject: 'Forget Password',
+     body: 'Dear @username, the VCode is '+ this.VSCode,
      isHtml: true
    };
    
    // Send a text message using default options
    this.emailComposer.open(email);*/
-
+  }
+  
+  SMS_Sending(){
+    //this.sms.send(this.mail.phone, this.VSCode);
+  }
+  Enter_VSCode(){
+    let alert = this.alertCtrl.create({
+      title: 'Forget Password',
+      subTitle: "Please enter the VSCode to change your password",
+      });
+      alert.addInput({
+        type:'prompt',
+        name: 'VSCode',
+        value: this.mail.name,
+        placeholder: 'VSCode'
+      });
+        alert.addButton({
+          text: 'Submit',
+          handler: (data: any) => {
+            this.getcode();
+            if(this.mail.code == this.VSCode){//顯示更改密碼介面
+              this.person.changePassword();
+            }
+          }
+        });
+        alert.present();
+  }
 }
